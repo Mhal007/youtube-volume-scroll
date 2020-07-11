@@ -1,0 +1,8 @@
+#volume-indicator {
+  color: yellow;
+  display: none;
+  font-size: 3em;
+  left: 20px;
+  position: absolute;
+  top: 20px;
+}
