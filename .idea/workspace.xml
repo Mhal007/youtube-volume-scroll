@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60ac2a6b-8b37-44dd-9512-3dbce335c06d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/VolumeScroll.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VolumeScroll.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/background.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/get_started128.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/get_started16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/get_started32.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/get_started48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/options.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/options.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/popup.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/popup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +50,7 @@
       <option name="presentableId" value="Default" />
       <updated>1594418160475</updated>
       <workItem from="1594418161688" duration="12623000" />
-      <workItem from="1594465369872" duration="70000" />
+      <workItem from="1594465369872" duration="502000" />
     </task>
     <servers />
   </component>
