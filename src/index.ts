@@ -1,15 +1,11 @@
-/* CONSTANTS */
-
-const STORAGE_VOLUME_KEY = 'yt-player-volume';
-const CHROME_STORAGE_VOLUME_STEP_KEY = 'volumeStep';
-const DEFAULT_VOLUME = 20;
-const VOLUME_INDICATOR_IN = 'volume-indicator';
-
+import './index.less';
+import { isHTMLElement } from "./types";
+import {CHROME_STORAGE_VOLUME_STEP_KEY, DEFAULT_VOLUME, STORAGE_VOLUME_KEY, VOLUME_INDICATOR_ID} from "./const";
 
 /* GETTERS */
 
 const getVideo = () => {
-  const video = document.getElementsByTagName('video')[0];
+  const video = document.querySelector('video');
   if (!video) {
     console.error('Video element not found');
   }
@@ -18,7 +14,7 @@ const getVideo = () => {
 }
 
 const getVolumeIndicator = () => {
-  const volumeIndicator = document.getElementById(VOLUME_INDICATOR_IN);
+  const volumeIndicator = document.querySelector<HTMLElement>(`#${VOLUME_INDICATOR_ID}`);
   if (!volumeIndicator) {
     console.error('Volume indicator not found');
   }
@@ -27,7 +23,7 @@ const getVolumeIndicator = () => {
 }
 
 const getVolumeSliderHandle = () => {
-  const volumeSliderHandle = document.getElementsByClassName('ytp-volume-slider-handle')[0];
+  const volumeSliderHandle = document.querySelector<HTMLElement>('.ytp-volume-slider-handle');
   if (!volumeSliderHandle) {
     console.error('Volume slider handle not found');
   }
@@ -45,7 +41,7 @@ const getLastUsedVolume = () => {
 
 /* SETTERS */
 
-const setVolume = (newVolume) => {
+const setVolume = (newVolume: number) => {
   console.log('newVolume', newVolume);
   setVideoVolume(newVolume);
   setSliderVolume(newVolume);
@@ -53,7 +49,7 @@ const setVolume = (newVolume) => {
   setIndicatorVolume(newVolume);
 }
 
-const setVideoVolume = (newVolume) => {
+const setVideoVolume = (newVolume: number) => {
   const video = getVideo();
   if (!video) {
     return;
@@ -62,7 +58,7 @@ const setVideoVolume = (newVolume) => {
   video.volume = newVolume;
 }
 
-const setSliderVolume = (newVolume) => {
+const setSliderVolume = (newVolume: number) => {
   const volumeSliderHandle = getVolumeSliderHandle();
   if (!volumeSliderHandle) {
     return;
@@ -71,7 +67,7 @@ const setSliderVolume = (newVolume) => {
   volumeSliderHandle.style.left = newVolume * 40 + 'px';
 }
 
-const setStorageVolume = (newVolume) => {
+const setStorageVolume = (newVolume: number) => {
   const now = Date.now();
   const newVolumeObject = JSON.stringify({
     creation: now,
@@ -83,7 +79,7 @@ const setStorageVolume = (newVolume) => {
   sessionStorage.setItem(STORAGE_VOLUME_KEY, newVolumeObject)
 }
 
-const setIndicatorVolume = (newVolume) => {
+const setIndicatorVolume = (newVolume: number) => {
   const volumeIndicator = getVolumeIndicator();
   if (!volumeIndicator) {
     return;
@@ -104,7 +100,7 @@ const setIndicatorVolume = (newVolume) => {
 
 /* ACTIONS */
 
-const adjustVolume = (event) => {
+const adjustVolume = (event: WheelEvent) => {
   const video = getVideo();
   if (!video) {
     return;
@@ -138,11 +134,15 @@ const retrieveLastUsedVolume = () => {
 
 /* HOOKS */
 
-const withVolumeStep = (callback) => {
+type ChromeStorageItems = {
+  [CHROME_STORAGE_VOLUME_STEP_KEY]?: number;
+}
+
+const withVolumeStep = (callback: (items: ChromeStorageItems) => void) => {
   chrome.storage.sync.get([CHROME_STORAGE_VOLUME_STEP_KEY], callback);
 }
 
-const onWheel = (event) => {
+const onWheel = (event: WheelEvent) => {
   event.preventDefault();
   adjustVolume(event);
 }
@@ -177,16 +177,16 @@ const listenForUrlChange = () => {
 const listenForVideoChanges = () => {
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
-      let node = mutation.target;
+      let node = mutation.target as HTMLElement;
 
-      if (node.tagName === 'VIDEO') {
+      if (isHTMLElement(node) && node.tagName === 'VIDEO') {
         retrieveLastUsedVolume();
       }
 
       for (let i = 0; i < mutation.addedNodes.length; i++) {
-        const added = mutation.addedNodes[i];
+        const added = mutation.addedNodes[i] as HTMLElement;
 
-        if (added.tagName === 'VIDEO') {
+        if (isHTMLElement(added) && added.tagName === 'VIDEO') {
           retrieveLastUsedVolume();
         }
       }
@@ -206,7 +206,7 @@ const listenForVideoChanges = () => {
 
 /* INITIATION */
 
-let indicatorTimeout;
+let indicatorTimeout: number | undefined;
 
 const initiateVolumeIndicator = () => {
   const video = getVideo();
@@ -215,9 +215,9 @@ const initiateVolumeIndicator = () => {
   }
 
   const volumeIndicator = document.createElement('div');
-  volumeIndicator.id = VOLUME_INDICATOR_IN;
+  volumeIndicator.id = VOLUME_INDICATOR_ID;
 
-  video.parentElement.appendChild(volumeIndicator);
+  video.parentElement?.appendChild(volumeIndicator);
 }
 
 initiateVolumeIndicator();

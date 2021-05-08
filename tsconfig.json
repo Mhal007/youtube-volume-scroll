@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": "./src",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es6"
+    ],
+    "pretty": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es6",
+    "types": [
+      "chrome"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

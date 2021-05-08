@@ -6,12 +6,16 @@
 //   changeColor.setAttribute('value', data.color);
 // });
 //
+// const changeBackground = () => {
+//   document.body.style.backgroundColor = "' + color + '";
+// }
+//
 // changeColor.onclick = function(element) {
 //   let color = element.target.value;
 //   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//     chrome.tabs.executeScript(
-//       tabs[0].id,
-//       {code: 'document.body.style.backgroundColor = "' + color + '";'}
-//       );
-//   });
+//       chrome.scripting.executeScript({
+//           function: () => changeBackground(color),
+//           target: tabs[0].id
+//       });
+//   }
 // };

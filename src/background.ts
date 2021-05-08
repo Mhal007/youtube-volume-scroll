@@ -1,4 +1,4 @@
-const DEFAULT_VOLUME_STEP = 3;
+import {DEFAULT_VOLUME_STEP} from "./const";
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({volumeStep: DEFAULT_VOLUME_STEP}, function() {
