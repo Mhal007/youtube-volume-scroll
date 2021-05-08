@@ -1,5 +1,5 @@
 import './index.less';
-import { isHTMLElement } from "./types";
+import { ChromeStorageItems, isHTMLElement } from "./types";
 import {CHROME_STORAGE_VOLUME_STEP_KEY, DEFAULT_VOLUME, STORAGE_VOLUME_KEY, VOLUME_INDICATOR_ID} from "./const";
 
 /* GETTERS */
@@ -42,7 +42,6 @@ const getLastUsedVolume = () => {
 /* SETTERS */
 
 const setVolume = (newVolume: number) => {
-  console.log('newVolume', newVolume);
   setVideoVolume(newVolume);
   setSliderVolume(newVolume);
   setStorageVolume(newVolume);
@@ -134,10 +133,6 @@ const retrieveLastUsedVolume = () => {
 
 /* HOOKS */
 
-type ChromeStorageItems = {
-  [CHROME_STORAGE_VOLUME_STEP_KEY]?: number;
-}
-
 const withVolumeStep = (callback: (items: ChromeStorageItems) => void) => {
   chrome.storage.sync.get([CHROME_STORAGE_VOLUME_STEP_KEY], callback);
 }
@@ -161,7 +156,7 @@ const listenForVideoScroll = () => {
 
 const listenForUrlChange = () => {
   chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
+    function(request) {
       if (request.message === 'TAB_URL_CHANGED') {
         const newUrl = request.url;
         const isVideoPage = newUrl.includes('/watch');

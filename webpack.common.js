@@ -6,6 +6,7 @@ module.exports = {
     new MiniCssExtractPlugin()
   ],
   entry: {
+    // 'serviceWorker': './src/background.ts',
     background: './src/background.ts',
     index: './src/index.ts',
     options: './src/options.ts',

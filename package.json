@@ -1,13 +1,15 @@
 {
   "name": "youtube-volume-scroll",
-  "version": "0.2",
+  "version": "0.3",
   "description": "Simple Chrome extension to enable altering the YouTube video volume using the scroll",
   "repository": "https://github.com/Mhal007/youtube-volume-scroll.git",
   "author": "Michał Weskida <michal.weskida@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "webpack --config webpack.dev.js -w",
-    "build": "webpack --config webpack.prod.js && cp ./build/background.js ./serviceWorker.js"
+    "build": "webpack --config webpack.prod.js && mv ./build/background.js serviceWorker.js",
+    "zip": "zip -r youtube-volume-scroll.zip ./build ./images ./src/options.html ./src/popup.html manifest.json serviceWorker.js",
+    "prepare-release": "yarn build && yarn run zip"
   },
   "devDependencies": {
     "@types/chrome": "0.0.137",
